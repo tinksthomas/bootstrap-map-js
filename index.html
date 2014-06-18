@@ -14,11 +14,14 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="corelogic/css/scorecard.css" rel="stylesheet">
+    <link href="src/css/corelogic/scorecard.css" rel="stylesheet">
 
     <!-- Bootstrap-map-js -->
     <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.9/js/esri/css/esri.css">   
-    <link rel="stylesheet" type="text/css" href="src/css/bootstrapmap.css">   
+    <link rel="stylesheet" type="text/css" href="src/css/bootstrapmap.css">
+    <style>
+      @import "http://js.arcgis.com/3.9/js/dojo/dijit/themes/claro/claro.css";
+    </style>    
     <style type="text/css">
       #mapDiv {
         min-height: 100%; 
@@ -33,7 +36,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body class='claro'>
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -60,15 +63,24 @@
                 <li><a href="#">Open Street Map</a></li>
               </ul>
             </li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+                        <li><a href="#about">Account</a></li>
+            <li><a href="#contact">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
-
-    <!-- Bootstrap-map-js -->
-    <div id="mapDiv"></div>
+ <div id="navToolbar">
+      <div data-dojo-type="dijit/form/Button" id="zoomin"  data-dojo-props="iconClass:'zoominIcon'">Zoom In</div>
+      <div data-dojo-type="dijit/form/Button" id="zoomout" data-dojo-props="iconClass:'zoomoutIcon'">Zoom Out</div>
+      <div data-dojo-type="dijit/form/Button" id="zoomfullext" data-dojo-props="iconClass:'zoomfullextIcon'">Full Extent</div>
+      <div data-dojo-type="dijit/form/Button" id="zoomprev" data-dojo-props="iconClass:'zoomprevIcon'">Prev Extent</div>
+      <div data-dojo-type="dijit/form/Button" id="zoomnext" data-dojo-props="iconClass:'zoomnextIcon'">Next Extent</div>
+      <div data-dojo-type="dijit/form/Button" id="pan" data-dojo-props="iconClass:'panIcon'">Pan</div>
+      <!--
+      <div data-dojo-type="dijit/form/Button" id="deactivate" data-dojo-props="iconClass:'deactivateIcon'">Deactivate</div>-->
+    </div>
+    <!-- Bootstrap-map-js <div id="mapDiv"></div>-->
+    <div id="map"></div></div>
       <script type="text/javascript">
         var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
         var dojoConfig = {
@@ -80,23 +92,37 @@
             }]
         };
     </script>
+    <!-- Lose some things with compact - such as large zoomslider
+    An extra 100kb though
     <script src="http://js.arcgis.com/3.9compact"></script>
+    <script src="http://js.arcgis.com/3.9"></script>
+    -->
+    <script src="http://js.arcgis.com/3.9"></script>
     <script>
-        require(["esri/map", "esri/dijit/Scalebar", "application/bootstrapmap", "application/corelogic/navigation", "dojo/domReady!"], 
-          function(Map, Scalebar, BootstrapMap, Navigation) {
+        require(["esri/map", "esri/dijit/Scalebar", "application/bootstrapmap", "application/corelogic/navigation", "esri/toolbars/navigation" , "dojo/on",
+        "dojo/parser",
+        "dijit/registry",
+        "dijit/Toolbar",
+        "dijit/form/Button",
+        "dojo/domReady!"], 
+          function(Map, Scalebar, BootstrapMap, NavigationModule, Navigation, on, parser, registry) {
+
+//parser.parse();
+
             <!-- Get a reference to the ArcGIS Map class -->
-            var map = BootstrapMap.create("mapDiv",{
+            var map = BootstrapMap.create("map",{
+              // var map = new Map("mapDiv",{
               basemap:"national-geographic",
-              center:[-122.45,37.77],
-              zoom:12
+              center:[153.04,-27.4],//brissy
+              zoom:11,
+              scrollWheelZoom:true,
+              sliderStyle:'large'           
             });
 
-            Navigation.setupScalebar(map);
-
-            //var scalebar = new Scalebar({
-             // map: map,
-             // scalebarUnit: "dual"
-            //});
+            NavigationModule.setupScalebar(map);
+            NavigationModule.setupNavTools(map);
+            //NavigationModule.setMyVar('joe');
+            map.on('click',function(){NavigationModule.myMapClick()});
 
            $(document).ready(function(){
               $("#basemapList li").click(function(e) {

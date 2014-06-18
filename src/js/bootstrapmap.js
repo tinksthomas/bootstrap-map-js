@@ -59,6 +59,7 @@ define(["esri/map", "esri/dijit/Popup", "esri/arcgis/utils", "dojo/_base/declare
           this._map = new Map(this._mapDivId, this._options);
           this._bindEvents();
           this._mapDiv.__map = this._map;
+          console.log(this._map);
           return this._map;
         },
         createWebMap: function (webMapId) {

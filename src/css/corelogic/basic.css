@@ -1,14 +1,5 @@
-body {
-	padding-top: 50px;
-}
-.starter-template {
-	padding: 40px 15px;
-	text-align: center;
-}
-
-@import "http://js.arcgis.com/3.9/js/dojo/dijit/themes/claro/claro.css";
-   .zoominIcon {
-        background-image: url(../images/nav_zoomin.png);
+      .zoominIcon {
+        background-image: url(../../src/images/nav_zoomin.png);
         width: 16px;
         height: 16px;
       }
@@ -47,12 +38,12 @@ body {
         background-image: url(../../src/images/nav_decline.png);
         width: 16px;
         height: 16px;
-	}
+      }
 
       #navToolbar {
         position: absolute;
-        top:300px;
+        top:200px;
         left: 20px;
         width: 50px;
         z-index: 50;
-      }	
+      }

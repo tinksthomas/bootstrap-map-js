@@ -8,43 +8,43 @@ body {
 
 @import "http://js.arcgis.com/3.9/js/dojo/dijit/themes/claro/claro.css";
    .zoominIcon {
-        background-image: url(../images/nav_zoomin.png);
+        background-image: url(../../images/nav_zoomin.png);
         width: 16px;
         height: 16px;
       }
 
       .zoomoutIcon {
-        background-image: url(../../src/images/nav_zoomout.png);
+        background-image: url(../../images/nav_zoomout.png);
         width: 16px;
         height: 16px;
       }
 
       .zoomfullextIcon {
-        background-image: url(../../src/images/nav_fullextent.png);
+        background-image: url(../../images/nav_fullextent.png);
         width: 16px;
         height: 16px;
       }
 
       .zoomprevIcon {
-        background-image: url(../../src/images/nav_previous.png);
+        background-image: url(../../images/nav_previous.png);
         width: 16px;
         height: 16px;
       }
 
       .zoomnextIcon {
-        background-image: url(../../src/images/nav_next.png);
+        background-image: url(../../images/nav_next.png);
         width: 16px;
         height: 16px;
       }
 
       .panIcon {
-        background-image: url(../../src/images/nav_pan.png);
+        background-image: url(../../images/nav_pan.png);
         width: 16px;
         height: 16px;
       }
 
       .deactivateIcon {
-        background-image: url(../../src/images/nav_decline.png);
+        background-image: url(../../images/nav_decline.png);
         width: 16px;
         height: 16px;
 	}
